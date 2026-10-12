@@ -1,0 +1,22 @@
+c Grille generee 18x18 K=18 seed=18001 (planted)
+GRID 18 18
+ZONES A B C D E F G H I J K L M N O P Q R
+
+R R R E E E E F F F F F F F M C C C
+R R R E E E E E E F F F F F M C C C
+R R R R E E E E E E F F F F M M M M
+R R R R R A A A E E E F F F F M M M
+R R R R B B P A A A A A F N M M M M
+R R R B B B P A K K K N N N N N M M
+R B B B B B P P K K K K N N N N N N
+B B B B B P P P K K K K N N N N O O
+B B B I I P P P K K K O O O O O O O
+I I I I I I P K K K K O O O O O O O
+I I I I I I J J K K K O O O O O O O
+I I I I I J J J K K K O O O O O O O
+I I I J J J J J J K K Q O O O O O O
+G G J J J J J J J L L Q O O O H H H
+G G J J J J J J L L L L L H H H H H
+G G J J J J J J J L L L H H H H H H
+G D D D J J J J J L L L H H H H H H
+G D D D D J J J L L L L H H H H H H

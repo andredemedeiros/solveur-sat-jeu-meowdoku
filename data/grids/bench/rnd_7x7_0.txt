@@ -1,0 +1,11 @@
+c Grille generee 7x7 K=7 seed=35000 (aleatoire)
+GRID 7 7
+ZONES A B C D E F G
+
+E E A A A A A
+F F A A A A A
+F C C C A A A
+F F C C C C C
+D D D C C C C
+D D B B B B G
+D D B B B G G

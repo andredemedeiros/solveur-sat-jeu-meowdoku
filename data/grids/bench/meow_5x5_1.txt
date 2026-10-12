@@ -1,0 +1,9 @@
+c Grille generee 5x5 K=5 seed=5001 (planted)
+GRID 5 5
+ZONES A B C D E
+
+A A A A D
+C C C A D
+C C E E D
+C B B E D
+B B B D D

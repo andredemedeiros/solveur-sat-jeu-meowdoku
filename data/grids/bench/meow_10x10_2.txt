@@ -1,0 +1,14 @@
+c Grille generee 10x10 K=10 seed=10002 (planted)
+GRID 10 10
+ZONES A B C D E F G H I J
+
+J J J F F A A B B B
+J J J A F A A A B B
+J J J A A A H B B B
+J J J A A A H H B B
+J J J D D H H H H C
+D D D D D G G C C C
+D D D E E G G C C C
+D E E E E G G C C C
+D E E E E G G C C C
+E E I I I G G C C C

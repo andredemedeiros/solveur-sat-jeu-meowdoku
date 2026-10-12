@@ -1,0 +1,16 @@
+c Grille generee 12x12 K=12 seed=12002 (planted)
+GRID 12 12
+ZONES A B C D E F G H I J K L
+
+L L H H B B J J J J J J
+G L H H B B B J J J J J
+G H H H B B B J J J J J
+G H H H B B K K J J J J
+G H H K K K K K K J D D
+G G G K K K K K D D D D
+G G G G G C C C E E E D
+G G G C C C A C E E E E
+G G G C C C A A E E E E
+C C C C C A A A I I E E
+C C F F C C A A A I E E
+C C F F F A A A A A A E

@@ -1,0 +1,13 @@
+c Grille generee 9x9 K=9 seed=45003 (aleatoire)
+GRID 9 9
+ZONES A B C D E F G H I
+
+A A A A A G G C G
+A A A A G G G G G
+A F A E G G G G G
+F F E E E G G G G
+F F F F E G G G G
+F F F F I I I G G
+F F F F I I I I B
+F D D F I I I I B
+H D D D I I I B B

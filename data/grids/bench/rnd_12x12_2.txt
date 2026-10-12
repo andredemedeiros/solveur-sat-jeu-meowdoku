@@ -1,0 +1,16 @@
+c Grille generee 12x12 K=12 seed=60002 (aleatoire)
+GRID 12 12
+ZONES A B C D E F G H I J K L
+
+B B B B K K K K K K E E
+B B B B D D K K K E E E
+D B B D D J K E K E E E
+D D D D D J J E E E E E
+D D D D J J E E E E E E
+D G G G J J E E E E E E
+D G G G G I I E E E I E
+G G G G I I I I I I I F
+A A A A I I I I I I F F
+A A A A H H H C I I F F
+A A A A H H H C C F F F
+A L L A A A C C F F F F

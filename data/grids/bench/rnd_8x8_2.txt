@@ -1,0 +1,12 @@
+c Grille generee 8x8 K=8 seed=40002 (aleatoire)
+GRID 8 8
+ZONES A B C D E F G H
+
+E E E E E E E E
+E E E E E E E E
+E E E E E E E E
+A G B F F F H C
+A G B F F F H C
+A B B B D D D C
+B B B B D D D C
+B B B B B D D D

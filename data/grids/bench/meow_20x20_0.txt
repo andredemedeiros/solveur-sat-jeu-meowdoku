@@ -1,0 +1,24 @@
+c Grille generee 20x20 K=20 seed=20000 (planted)
+GRID 20 20
+ZONES A B C D E F G H I J K L M N O P Q R S T
+
+E E E E N N N N B B B B L L L S S S F F
+E E E E N B B B B B B L L L L S S S F F
+E E E E N B B B B B B B L L L S S F F F
+P P P E E B B B B B B B L L M M M F F F
+P P P E E B B B B B B B B L M M F F F F
+P P P E E B B B B B B B B L M M F F F F
+P P P P R R R R B B B B B B B M F F F F
+C P P P R R R B B B R B B B B B F F F F
+C P P P R R R R R R R R R R R F F F F F
+P P P P P R R G R R R R R R R J F F F F
+P P P P P G G G R O O R R R J J J F J F
+P I P P P G G O O O O J J J J J J J J J
+I I I I I Q Q O O O O J J J J J J J J J
+I I I I Q Q Q Q O Q O J J J J J J J J J
+I I I I Q Q Q Q Q Q J J J J J J A J A K
+I I I H H H H H Q Q J J J J J A A A A K
+I H H H H H H H Q D D D D J A A A A A K
+I H H H H H H Q Q Q D D D D A A A K K K
+I H H H H H H Q Q D D D D D A A A K K K
+H H H H H H H T T T T T T T A A K K K K

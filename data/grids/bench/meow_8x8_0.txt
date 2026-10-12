@@ -1,0 +1,12 @@
+c Grille generee 8x8 K=8 seed=8000 (planted)
+GRID 8 8
+ZONES A B C D E F G H
+
+A D D D D G G G
+A A D D G G G G
+A F F E E E G C
+A F F E E H G C
+E E E E E H G C
+E E E E B H H C
+E E B B B H H C
+B B B B B B B C

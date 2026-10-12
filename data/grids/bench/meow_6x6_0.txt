@@ -1,0 +1,10 @@
+c Grille generee 6x6 K=6 seed=6000 (planted)
+GRID 6 6
+ZONES A B C D E F
+
+F F F F E E
+B B F E E E
+B F F E E E
+D D D D C C
+D A A C C C
+D A A A A C

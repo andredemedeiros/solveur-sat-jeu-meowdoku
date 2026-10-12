@@ -1,0 +1,13 @@
+c Grille generee 9x9 K=9 seed=9000 (planted)
+GRID 9 9
+ZONES A B C D E F G H I
+
+G G G F F E E E I
+G G G F F E E I I
+G G C F F F I I I
+G C C F F F I I I
+B A A A F H I I I
+B A A A A A I I I
+B A A A A A I I I
+B B A A A A D D D
+B B A A A D D D D

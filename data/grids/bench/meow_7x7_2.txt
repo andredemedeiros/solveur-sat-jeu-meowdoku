@@ -1,0 +1,11 @@
+c Grille generee 7x7 K=7 seed=7002 (planted)
+GRID 7 7
+ZONES A B C D E F G
+
+E E G G G A A
+E E G G G A A
+E E G A A A A
+C C C A A B A
+C C C B B B B
+F F F F B B B
+F F F D D B B

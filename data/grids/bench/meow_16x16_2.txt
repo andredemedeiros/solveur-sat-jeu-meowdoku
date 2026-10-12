@@ -1,0 +1,20 @@
+c Grille generee 16x16 K=16 seed=16002 (planted)
+GRID 16 16
+ZONES A B C D E F G H I J K L M N O P
+
+C C C C C F F F N N N N N O O O
+C C C C C D F F N N N N N O O O
+C C A A D D D N N N N N N O O O
+C C A A A D D J N N J J J O O O
+A A A A A A D J J J J J J O O O
+P P A A A A D J J J J J J O O O
+P P A A A A J J J J J J J O O O
+P P L L L K K K K J J J J O O O
+P L L L L K K K K K B M M O O O
+P L L L L K K K K B B M M O O H
+P P E L L L K K K B B B B B O H
+E E E E L L K K K K B B B B O H
+E E E E E E K K K G G B B B O O
+E E E E E E K K K G G B B I O O
+E E E E E E K K K G G G I I I O
+E E E E E E K K G G G G I I I I

@@ -1,0 +1,18 @@
+c Grille generee 14x14 K=14 seed=14001 (planted)
+GRID 14 14
+ZONES A B C D E F G H I J K L M N
+
+L L L L I I I K K K K D D D
+L L L L I I K K K K D D D D
+L L L L L I I K K K G D D D
+L L L L L L C C G G G N N N
+L L L L C C C C G G G N N N
+H H H H C C C C G G G N N N
+H H H H C C C C G G G N N N
+H H H A G G G G G G J J J J
+B H H A A G E E J J J J J J
+B B B A A E E E E J J J J J
+B B B B A E E E E E J J F F
+B B B B A E E E E E E F F F
+B M M M M E E E E E E E F F
+B M M M M M E E E E E E F F

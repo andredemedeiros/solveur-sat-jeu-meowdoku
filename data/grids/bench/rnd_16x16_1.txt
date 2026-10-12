@@ -1,0 +1,20 @@
+c Grille generee 16x16 K=16 seed=80001 (aleatoire)
+GRID 16 16
+ZONES A B C D E F G H I J K L M N O P
+
+P P P E E E E K K K K K K K K K
+P P P E E E E G G G G K K K K K
+P P P E E E G G G G K K K K K K
+B B E E E E G G G A A K K F F F
+B B E E E E E E G A A K K K F K
+D D E E E L L G G A A A A K K K
+C D D E L L L L G A A A J J K K
+C D D D L L L M M A A N N J J K
+C D D D D L L M M M M N J J J J
+C C C I L L L M M M M N N J J J
+C C C I L L L M M M N N N J J J
+C H I I I L L L M O N N N N J O
+H H I I I I O O O O N N N N O O
+H H I I I I O O O O O O O O O O
+I I I I I I O O O O O O O O O O
+I I I I I I O O O O O O O O O O

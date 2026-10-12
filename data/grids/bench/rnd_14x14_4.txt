@@ -1,0 +1,18 @@
+c Grille generee 14x14 K=14 seed=70004 (aleatoire)
+GRID 14 14
+ZONES A B C D E F G H I J K L M N
+
+B B B B B B D J J J J J J J
+B B B B B D D D J J F F F K
+I I B B D D D J J J F F F K
+I I I B D D D F F F F F F K
+I I I I C C C F F F F F K K
+I I I I E C C C K K K K K K
+E E E I E E C C C C C K K K
+E E E E E E C C C C C N K K
+E E E E E E E C C N N N A A
+E E E E E E E E N N N N N N
+E E E E E E E L L L L N N N
+G G E E E E L L L L L L H H
+G G G G G G L L L M L L H H
+G G G G G L L L M M M M M H

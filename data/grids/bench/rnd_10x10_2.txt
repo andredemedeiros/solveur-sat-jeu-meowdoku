@@ -1,0 +1,14 @@
+c Grille generee 10x10 K=10 seed=50002 (aleatoire)
+GRID 10 10
+ZONES A B C D E F G H I J
+
+B B B B J J A A A A
+B B B B J J A A A A
+B B B B J J J J J H
+B B B F F F H H H H
+B B F F F F H H H H
+C B B F G G H H H H
+C B G G G I I H H H
+C C C C I I D D E H
+C C C C I I E E E E
+C C C I I I E E E E

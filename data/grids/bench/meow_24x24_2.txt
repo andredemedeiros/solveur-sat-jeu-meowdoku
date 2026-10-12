@@ -1,0 +1,28 @@
+c Grille generee 24x24 K=24 seed=24002 (planted)
+GRID 24 24
+ZONES A B C D E F G H I J K L M N O P Q R S T U V W X
+
+W W W W W W W W O O O O O O O U U U I I I I I I
+W W W W W W W K K K K O O O O U U U I I I V I I
+W W W W W W W K K K K K K O O U U U U I V V V V
+J W W W W W W K K K K K K K U U U U U I V V V V
+J J J J W W W K K K K K K K U U U U U V V V V V
+J J J J W W W W W W K K K K U U U U V V V V V V
+F F J J W W W W W W K K K K P P U U V V V V V V
+F H H H H H W W W W W K K K P P P P P V V V V V
+H H H H H H H G G W N N N P P P P P P V V V V V
+H H H H H H H G G G N N N N P P P P P V V V V V
+H H H L H H G G G E N N N N N P P P P V V V V V
+H H H L L G G G G E E N N N N N P P P V V V V V
+H H L L L G G G T E E E E E N N N P P P V X X X
+L L L L L T T T T E E E E E N N N P N P X X X X
+L L L L L L T T T T E E A A N N N N N X X X X X
+L L L L L T T T T T E A A A A N N N N N N X X X
+L L T T T T T T T T T T A A R N M M S S S S S X
+L L C T T T T T T T T T T R R R M M S S S S S S
+L C C C T T T T T T T T T R R R R R R R R S Q Q
+C C C C B B B T T D T T T R R R R R R R R S Q Q
+C C C C B B B D D D D D R R R R R R R R R Q Q Q
+C C C C B B B B B B B D R R R R R R R R Q Q Q Q
+C C C C B B B B B B B B B R R R R R R R Q Q Q Q
+C C C C B B B B B B B B B R R R R R R R Q Q Q Q

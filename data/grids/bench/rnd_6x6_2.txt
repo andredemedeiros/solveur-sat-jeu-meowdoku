@@ -1,0 +1,10 @@
+c Grille generee 6x6 K=6 seed=30002 (aleatoire)
+GRID 6 6
+ZONES A B C D E F
+
+A A A A A A
+A A A A A A
+A A D D C C
+E E D D D D
+F E E E E B
+F E E B B B
