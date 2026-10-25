@@ -1,2 +1,0 @@
-mode=optimized  instances=859  correctes=857  timeouts=2  erreurs=0  temps total (correctes)=126.5 s  max=8.33 s
-mode=dpll  instances=859  correctes=776  timeouts=83  erreurs=0  temps total (correctes)=2007.6 s  max=59.02 s

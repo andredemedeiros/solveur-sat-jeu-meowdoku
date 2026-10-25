@@ -342,13 +342,17 @@ class MRV(Heuristic):
     alors qu'une décision x = 0 (choisie par les heuristiques à polarité
     majoritaire, les littéraux négatifs étant majoritaires) n'apporte presque
     rien. Si aucune clause n'est entièrement positive, on se replie sur H6d.
-    Le choix « moins contraignante » a été retenu après essai (Q5) : sur les
-    grilles 16..24 et aléatoires 12..16, PAR-2 de 15 s contre 30 s pour « plus
-    petit indice » et 71 s pour « plus contraignante ».
-    Coût : deux parcours de F."""
+    Le choix de la case dans la clause (paramètre ``choice``) a été comparé
+    par experiments/h9_variants.py : « least » (la moins contraignante, retenue),
+    « index » (plus petit indice), « most » (la plus contraignante).
+    Coût : deux parcours de F (un seul pour « index »)."""
     code, name = "H9", "MRV"
+    CHOICES = ("least", "index", "most")
 
-    def __init__(self):
+    def __init__(self, choice: str = "least"):
+        if choice not in self.CHOICES:
+            raise ValueError(choice)
+        self.choice = choice
         self.fallback = VJWDynamic()
 
     def choose(self, F, lits):
@@ -366,11 +370,15 @@ class MRV(Heuristic):
                         break
         if best is None:
             return self.fallback.choose(F, lits)
+        if self.choice == "index":
+            return min(best), True
         neg: Counter = Counter()
         upd = neg.update
         for c in F:
             if len(c) == 2:
                 upd(c)
+        if self.choice == "most":
+            return min(best, key=lambda l: (-neg.get(-l, 0), l)), True
         return min(best, key=lambda l: (neg.get(-l, 0), l)), True
 
 

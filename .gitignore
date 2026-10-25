@@ -2,3 +2,5 @@ __pycache__/
 *.pyc
 .pytest_cache/
 rapport/rapport.html
+*.log
+data/generated/grids/custom/

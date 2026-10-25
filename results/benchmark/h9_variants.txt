@@ -1,0 +1,4 @@
+27 instances, limite 30 s (PAR-2 : délai dépassé compté 2 × limite)
+  least  résolues 27/27  PAR-2 moyen   1.2 s  décisions médianes      23  réponses fausses 0
+  index  résolues 27/27  PAR-2 moyen   2.1 s  décisions médianes      24  réponses fausses 0
+  most   résolues 25/27  PAR-2 moyen   5.5 s  décisions médianes      20  réponses fausses 0

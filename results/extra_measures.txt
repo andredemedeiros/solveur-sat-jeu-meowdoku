@@ -1,0 +1,85 @@
+# Mesures complémentaires (Python 3.14.8)
+
+## Q1 -- modélisation et générateur
+figure 1 : 321 clauses (420 sans dédoublonnage)
+figure 1 : solution unique : True
+grille 50 x 50 (graine 0) : 186236 clauses, SAT=True, CDCL 0.31 s de CPU
+générateur --unique 8 x 8 (graines 0-2) : 0.1, 0.0, 0.0 s
+générateur --unique 10 x 10 (graines 0-2) : 0.7, 1.7, 1.9 s
+générateur --unique 12 x 12 (graines 0-2) : 3.2, 1.6, 0.3 s
+générateur --unique 14 x 14 (graine 0) : 25.9 s
+générateur --unique 14 x 14 (graine 1) : 74.4 s
+générateur --unique 14 x 14 (graine 2) : 113.8 s
+grilles à régions aléatoires : 25 UNSAT sur 40
+
+## Q2 -- lecture DIMACS, validation, algorithmes 1 et 2
+instances publiques dont des clauses ne finissent pas par 0 sur leur ligne : public-04.cnf, public-07.cnf, public-12.cnf, public-14.cnf, public-21.cnf, public-23.cnf
+public-03 identique à dubois21 : True
+algorithme 1 / algorithme 2 : rapport géométrique 0.99 sur 103 instances (> 10 ms), mêmes délais dépassés : True
+
+## Q5 -- Meowdoku (results/benchmark/bench.csv, limite 20 s, PAR-2 = 40 s)
+grilles plantées N >= 16 : % résolues
+  alg2          72
+  cdcl         100
+  dpllh:H0      72
+  dpllh:H1      67
+  dpllh:H2d     75
+  dpllh:H2s     50
+  dpllh:H3d     75
+  dpllh:H3s     50
+  dpllh:H4d     75
+  dpllh:H4s     50
+  dpllh:H5d     75
+  dpllh:H5s     50
+  dpllh:H6d     92
+  dpllh:H6s     58
+  dpllh:H7d     75
+  dpllh:H7s     50
+  dpllh:H8      83
+  dpllh:H9     100
+grilles à régions aléatoires : % résolues
+  alg2          73
+  cdcl         100
+  dpllh:H0      73
+  dpllh:H1      90
+  dpllh:H2d     77
+  dpllh:H2s     73
+  dpllh:H3d     77
+  dpllh:H3s     73
+  dpllh:H4d     77
+  dpllh:H4s     73
+  dpllh:H5d     77
+  dpllh:H5s     73
+  dpllh:H6d     77
+  dpllh:H6s     73
+  dpllh:H7d     77
+  dpllh:H7s     73
+  dpllh:H8      87
+  dpllh:H9     100
+grilles plantées 24 x 24 : PAR-2 (moyenne géométrique, s)
+  alg2        13.63
+  cdcl         0.06
+  dpllh:H0    13.21
+  dpllh:H1    40.00
+  dpllh:H2d   19.73
+  dpllh:H2s   40.00
+  dpllh:H3d   19.47
+  dpllh:H3s   40.00
+  dpllh:H4d   20.24
+  dpllh:H4s   40.00
+  dpllh:H5d   19.71
+  dpllh:H5s   40.00
+  dpllh:H6d    8.68
+  dpllh:H6s   40.00
+  dpllh:H7d   20.47
+  dpllh:H7s   40.00
+  dpllh:H8    20.14
+  dpllh:H9     2.11
+
+## Q6 -- compétition, mode optimized (results/competition/competition_optimized.csv)
+résolues 899 / 900 ; < 0,5 s : 885 ; < 2 s : 897 ; médiane 0.23 s
+> 2 s : hole8.cnf 5.2 s, hole9.cnf 22.0 s
+formules triviales : lampes.cnf 0.19 s, smoke_01_sat.cnf 0.22 s, unit_01_sat.cnf 0.23 s
+
+## Limites -- CDCL (Python) contre PicoSAT (C, via pycosat, conversion comprise)
+39 instances : CDCL / PicoSAT = 5 (moyenne géométrique), de 1 à 37

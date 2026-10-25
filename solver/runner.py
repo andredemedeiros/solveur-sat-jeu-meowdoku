@@ -1,8 +1,9 @@
 """Exécution instrumentée d'un solveur sur un fichier DIMACS (validation Q2/Q4,
-mesures Q5). Toujours exécutée dans un processus fils (cf. benchmark.py)."""
+mesures Q5). Toujours exécutée dans un processus fils (cf. experiments/benchmark.py)."""
 
 from __future__ import annotations
 
+import json
 import os
 import re
 
@@ -12,15 +13,39 @@ from .dpll import Timeout, clock
 SOLVERS = ["alg1", "alg2", "cdcl"]  # + "dpllh:<code>"
 
 
+_EXPECTED_JSON: dict[str, dict] = {}
+
+
+def _expected_json(directory: str) -> dict:
+    """Contenu de ``directory/expected.json`` ({fichier: "SAT"|"UNSAT"}),
+    format des instances publiques fournies par les enseignants."""
+    if directory not in _EXPECTED_JSON:
+        path = os.path.join(directory, "expected.json")
+        try:
+            with open(path, encoding="utf-8") as f:
+                _EXPECTED_JSON[directory] = json.load(f)
+        except (OSError, ValueError):
+            _EXPECTED_JSON[directory] = {}
+    return _EXPECTED_JSON[directory]
+
+
 def expected_status(path: str, cnf=None):
-    """Statut attendu : commentaire « status X » (nos instances), sinon le nom
-    de fichier SATLIB (uf* / uuf*, *-yes* / *-no*, hole*, dubois*)."""
+    """Statut attendu, par ordre de priorité :
+    1. ``expected.json`` du dossier de l'instance ou de son parent
+       (instances publiques : ``data/public-instances/expected.json``) ;
+    2. commentaire « status X » (nos instances générées, statut pycosat) ;
+    3. nom de fichier SATLIB (uf* / uuf*, *-yes* / *-no*, hole*, dubois*)."""
+    d = os.path.dirname(os.path.abspath(path))
+    b = os.path.basename(path)
+    for directory in (d, os.path.dirname(d)):
+        st = _expected_json(directory).get(b)
+        if st in ("SAT", "UNSAT"):
+            return st
     if cnf is not None:
         for c in cnf.comments:
             m = re.match(r"status (SAT|UNSAT)", c)
             if m:
                 return m.group(1)
-    b = os.path.basename(path)
     if b.startswith("uuf") or "-no-" in b or b.startswith(("hole", "dubois", "php")):
         return "UNSAT"
     if b.startswith(("uf", "flat")) or "-yes" in b:

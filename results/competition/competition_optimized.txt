@@ -1,0 +1,21 @@
+mode=optimized  timeout=60 s  jobs=1
+  data/examples                            instances=   2  correctes=   2  timeouts=  0  fausses= 0  non vérifiables= 0  temps total=    0.7 s  médiane= 0.37 s  max= 0.56 s
+  data/generated/cnf/meow_nored            instances=  36  correctes=  36  timeouts=  0  fausses= 0  non vérifiables= 0  temps total=    8.5 s  médiane= 0.23 s  max= 0.33 s
+  data/generated/cnf/meow_rnd              instances=  40  correctes=  40  timeouts=  0  fausses= 0  non vérifiables= 0  temps total=    9.6 s  médiane= 0.22 s  max= 0.48 s
+  data/generated/cnf/meow_sat              instances=  36  correctes=  36  timeouts=  0  fausses= 0  non vérifiables= 0  temps total=    8.1 s  médiane= 0.22 s  max= 0.26 s
+  data/generated/cnf/php                   instances=   5  correctes=   5  timeouts=  0  fausses= 0  non vérifiables= 0  temps total=    1.6 s  médiane= 0.23 s  max= 0.71 s
+  data/generated/cnf/rand3                 instances=  60  correctes=  60  timeouts=  0  fausses= 0  non vérifiables= 0  temps total=   12.7 s  médiane= 0.21 s  max= 0.24 s
+  data/public-instances/instances          instances=  41  correctes=  41  timeouts=  0  fausses= 0  non vérifiables= 0  temps total=    9.7 s  médiane= 0.22 s  max= 0.39 s
+  data/satlib/aim                          instances=  72  correctes=  72  timeouts=  0  fausses= 0  non vérifiables= 0  temps total=   15.8 s  médiane= 0.22 s  max= 0.28 s
+  data/satlib/dubois                       instances=  13  correctes=  13  timeouts=  0  fausses= 0  non vérifiables= 0  temps total=    3.0 s  médiane= 0.23 s  max= 0.29 s
+  data/satlib/flat50-115                   instances=  30  correctes=  30  timeouts=  0  fausses= 0  non vérifiables= 0  temps total=    6.6 s  médiane= 0.21 s  max= 0.27 s
+  data/satlib/pigeon-hole                  instances=   5  correctes=   4  timeouts=  1  fausses= 0  non vérifiables= 0  temps total=   28.2 s  médiane= 2.93 s  max=22.02 s
+  data/satlib/uf100-430                    instances=  30  correctes=  30  timeouts=  0  fausses= 0  non vérifiables= 0  temps total=    6.7 s  médiane= 0.22 s  max= 0.26 s
+  data/satlib/uf20-91                      instances= 100  correctes= 100  timeouts=  0  fausses= 0  non vérifiables= 0  temps total=   20.2 s  médiane= 0.20 s  max= 0.23 s
+  data/satlib/uf50-218                     instances= 100  correctes= 100  timeouts=  0  fausses= 0  non vérifiables= 0  temps total=   28.5 s  médiane= 0.23 s  max= 0.99 s
+  data/satlib/uf75-325                     instances= 100  correctes= 100  timeouts=  0  fausses= 0  non vérifiables= 0  temps total=   29.8 s  médiane= 0.28 s  max= 0.56 s
+  data/satlib/uuf100-430                   instances=  30  correctes=  30  timeouts=  0  fausses= 0  non vérifiables= 0  temps total=    8.3 s  médiane= 0.27 s  max= 0.40 s
+  data/satlib/uuf50-218                    instances= 100  correctes= 100  timeouts=  0  fausses= 0  non vérifiables= 0  temps total=   24.9 s  médiane= 0.24 s  max= 0.42 s
+  data/satlib/uuf75-325                    instances= 100  correctes= 100  timeouts=  0  fausses= 0  non vérifiables= 0  temps total=   24.5 s  médiane= 0.23 s  max= 0.37 s
+  TOTAL                                    instances= 900  correctes= 899  timeouts=  1  fausses= 0  non vérifiables= 0  temps total=  247.5 s  médiane= 0.23 s  max=22.02 s
+TIMEOUT data/satlib/pigeon-hole/hole10.cnf
