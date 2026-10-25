@@ -1,2 +1,0 @@
-data/satlib/pigeon-hole/hole8.cnf s UNSATISFIABLE 5.7 s
-data/satlib/pigeon-hole/hole9.cnf s UNSATISFIABLE 22.8 s

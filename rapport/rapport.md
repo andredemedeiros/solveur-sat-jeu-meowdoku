@@ -72,9 +72,9 @@ Notons $R_1,\dots,R_K$ les régions.
   N = M = K, davantage si une région est très grande). Nous avons aussi
   implémenté (option `--amo seq`) le **compteur séquentiel** de Sinz (2005),
   linéaire mais introduisant des variables auxiliaires ; avec le codage par
-  paires, une grille 50 × 50 donne déjà 186 236 clauses, résolues en 1,1 s
-  de CPU par le solveur optimisé : le codage par paires reste le choix par
-  défaut.
+  paires, une grille 50 × 50 donne déjà 186 236 clauses, résolues en 0,3 s
+  de CPU par le solveur optimisé (`results/extra_measures.txt`) : le codage
+  par paires reste le choix par défaut.
 * *Dédoublonnage.* Deux cases d'une même région **et** d'une même ligne
   engendreraient deux fois la même clause : l'encodeur ne l'émet qu'une fois
   (sur la grille de la figure 1 : 321 clauses au lieu de 420).
@@ -120,8 +120,9 @@ la table des variables et le décompte des clauses par famille.
    c ∈ S′ \ S et on la cède à une région voisine, à condition que sa région
    d'origine reste connexe. S′ devient illicite (sa région d'origine n'a plus
    de chat, la région d'accueil en a deux) alors que S reste licite (c n'est
-   pas un germe). On itère jusqu'à unicité. En pratique : quelques secondes
-   jusqu'à 12 × 12 ; au-delà, le nombre de solutions
+   pas un germe). On itère jusqu'à unicité. En pratique : moins de 4 s
+   jusqu'à 12 × 12, mais 26 à 114 s en 14 × 14 (trois graines,
+   `results/extra_measures.txt`) : au-delà, le nombre de solutions
    concurrentes rend la méthode lente (limite assumée de l'option).
 
 L'option `--random` tire au contraire des germes quelconques : la grille n'a
@@ -237,7 +238,7 @@ l'entrée, dictionnaire région ↦ (ligne, colonne), grille de `*`).
 Le solveur se choisit par option : `--solver dpll` (algorithme 2),
 `--solver dpllh` (DPLL_H, par défaut avec H9, meilleure configuration DPLL en Q5) ou
 `--solver cdcl` (défaut). Le CDCL est le cœur du mode `optimized` de la Q6 ;
-il résout une grille 50 × 50 en 1,1 s de CPU, alors qu'en
+il résout une grille 50 × 50 en 0,3 s de CPU, alors qu'en
 24 × 24 les DPLL demandent déjà 9 à 40 s avec les heuristiques de l'énoncé
 (PAR-2 géométrique, échecs compris ; 2,1 s avec H9, Q5).
 
@@ -716,18 +717,23 @@ exemples de l'énoncé, SATLIB, 3-SAT généré, PHP, grilles Meowdoku). Mode `o
   des tiroirs), avec un CDCL interruptible et reprenable et un processus
   auxiliaire qui ne survit pas à la limite de temps.
 * Toutes les mesures du rapport sont reproductibles par les scripts de
-  `experiments/` et conservées dans `results/` ; les instances générées sont
-  reproduites à l'identique par `experiments/gen_cnf.py` (graines fixes).
+  `experiments/` (commandes dans le `README.md`) et conservées dans
+  `results/` ; les mesures ponctuelles (figure 1, grille 50 × 50, unicité,
+  comparaison avec PicoSAT, statistiques dérivées des campagnes) sont dans
+  `results/extra_measures.txt` (`experiments/extra_measures.py`, exécuté
+  sous Python 3.14, seul interpréteur disposant ici de `pycosat`). Les
+  instances générées sont reproduites à l'identique par
+  `experiments/gen_cnf.py` (graines fixes).
 * **Limites.** Le solveur reste en Python pur : sur 39 instances (`uuf75`,
   `uf100`, `flat50`, grilles 20 × 20 et 24 × 24, 3 instances publiques), notre
-  CDCL est 6 fois plus lent que PicoSAT, écrit en C (moyenne géométrique ;
-  de 2 à 43 fois ; temps de PicoSAT mesuré via `pycosat`, conversion des
+  CDCL est 5 fois plus lent que PicoSAT, écrit en C (moyenne géométrique ;
+  de 1 à 37 fois ; temps de PicoSAT mesuré via `pycosat`, conversion des
   clauses comprise, ce qui avantage notre solveur). Les instances
   intrinsèquement dures pour la résolution restent hors de portée au-delà
   d'une certaine taille (`hole10` : ni le CDCL ni le DPLL ne concluent en
   60 s) ; `hole9` est résolu en 22 s, à un peu plus d'un tiers de la limite.
-  L'option d'unicité du générateur devient lente au-delà de 12 × 12 (1 à
-  10 s jusqu'à 12 × 12, plus de 5 min en 14 × 14).
+  L'option d'unicité du générateur devient lente au-delà de 12 × 12 (moins
+  de 4 s jusqu'à 12 × 12, 26 à 114 s en 14 × 14).
 * **Pistes.** Pré-traitement (élimination de variables, subsomption),
   littéraux bloqueurs dans les listes de surveillance, minimisation récursive
   des clauses apprises, redémarrages adaptatifs (Glucose), détection et codage

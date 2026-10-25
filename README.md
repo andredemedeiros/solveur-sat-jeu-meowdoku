@@ -1,8 +1,9 @@
 # Projet MLSF — Partie I : solveur SAT et Meowdoku
 
 Python ≥ 3.12, **bibliothèque standard uniquement** pour le solveur (`sat.py`).
-Outils d'analyse : `pycosat` (solveur de référence pour la validation),
-`pandas`, `matplotlib`, `pytest` (`pip install -r requirements.txt`).
+Outils de génération, de validation et d'analyse : `pycosat` (solveur de
+référence), `numpy`, `pandas`, `matplotlib`, `pytest`
+(`pip install -r requirements.txt`).
 Toutes les commandes se lancent depuis la racine du dépôt.
 
 ## Arborescence
@@ -24,7 +25,8 @@ results/
   validation/           Q2.3, Q4 : validation croisée des 19 solveurs
   benchmark/            Q4, Q5 : mesures (bench.csv), tableaux (tables.md), figures,
                         variantes de H9, principe des tiroirs (pigeon_hole.csv)
-  competition/          Q6 : simulation de la compétition (modes dpll et optimized), hole8/9 seuls
+  competition/          Q6 : simulation de la compétition (modes dpll et optimized)
+  extra_measures.txt    mesures complémentaires citées dans le rapport (Q1, Q2, Q5, Q6, limites)
 rapport/                rapport.md (source), rapport.pdf (à rendre), build_pdf.py, style.css
 docs/                   énoncé du projet
 ```
@@ -33,7 +35,7 @@ docs/                   énoncé du projet
 |---|---|---|
 | `solver/cnf.py` | lecture/écriture DIMACS, structure CNF, vérification de modèles | Q2.1 |
 | `solver/dpll.py` | algorithmes 1 et 2 de l'énoncé (DPLL récursif, choix aléatoire) | Q2.2 |
-| `solver/heuristics.py` | heuristiques H0–H7 (statiques `s` / dynamiques `d`) + H8 (MOMS-produit), H9 (MRV) | Q4 |
+| `solver/heuristics.py` | heuristiques H0, H1, H2–H7 (statiques `s` / dynamiques `d`), H8 (MOMS-produit), H9 (MRV) | Q4 |
 | `solver/dpll_h.py` | algorithme 3 (DPLL_H) instrumenté (décisions, retours arrière, …) | Q4, Q5 |
 | `solver/cdcl.py` | solveur CDCL (watched literals, 1-UIP, VSIDS, restarts), interruptible et reprenable | Q6 |
 | `solver/portfolio.py` | mode `optimized` : CDCL, relayé après 2 s par DPLL_H (H1) dans un processus parallèle | Q6 |
@@ -50,6 +52,7 @@ docs/                   énoncé du projet
 | `experiments/benchmark.py`, `experiments/analyze.py` | campagne de mesures et analyse | Q5 |
 | `experiments/h9_variants.py` | choix de la case dans la clause de H9 (moins / plus contraignante, indice) | Q4 |
 | `experiments/competition.py` | simulation de la compétition (appelle `sat.py`, lit `expected.json`) | Q6 |
+| `experiments/extra_measures.py` | mesures complémentaires du rapport (figure 1, 50 × 50, unicité, PicoSAT, …) | Q1–Q6 |
 
 ## Exemples
 
@@ -62,21 +65,40 @@ python cli/generate_grids.py 10 --count 5 --unique     # -> data/generated/grids
 python cli/solve_meowdoku.py data/examples/grille1.txt -o grille1.sol.txt
 python cli/verify_solution.py grille1.sol.txt
 
-# Q2 / Q4 : validation (inclut data/public-instances), Q5 : mesures
-python experiments/validate.py --timeout 20
-python experiments/benchmark.py --timeout 20 --jobs 6 && python experiments/analyze.py
-python experiments/h9_variants.py --timeout 30 --jobs 6
-python experiments/benchmark.py --timeout 120 --instances data/satlib/pigeon-hole/hole{9,10}.cnf \
-    --solvers cdcl alg2 dpllh:H1 dpllh:H2d dpllh:H4d dpllh:H6d dpllh:H8 dpllh:H9 \
-    --out results/benchmark/pigeon_hole.csv
-
 # Q6 : interface imposée
 python sat.py instance.cnf --mode dpll
 python sat.py instance.cnf --mode optimized --output-model
-python experiments/competition.py --mode optimized --jobs 1     # toutes les instances de data/
-# conditions officielles (python:3.12-slim, 4 CPU, 8 Gio) :
-docker run --rm --cpus=4 --memory=8g -v "$PWD":/w -w /w python:3.12-slim \
-    python experiments/competition.py --jobs 1
+```
+
+## Reproduction des résultats du rapport
+
+Chaque commande régénère les fichiers de `results/` cités dans le rapport.
+
+```sh
+# Q2.3, Q4 : validation croisée (19 solveurs, 180 instances dont les 41 publiques)
+python experiments/validate.py --timeout 20 --jobs 4 > results/validation/validation.txt
+
+# Q5 : campagne de mesures (4 840 exécutions, ~30 min), tableaux et figures
+python experiments/benchmark.py --timeout 20 --jobs 6
+python experiments/analyze.py
+
+# Q4 : variantes de H9 ; Q5 : principe des tiroirs
+python experiments/h9_variants.py --timeout 30 --jobs 6 > results/benchmark/h9_variants.txt
+python experiments/benchmark.py --timeout 120 --jobs 6 \
+    --instances data/satlib/pigeon-hole/hole9.cnf data/satlib/pigeon-hole/hole10.cnf \
+    --solvers cdcl alg2 dpllh:H1 dpllh:H2d dpllh:H4d dpllh:H6d dpllh:H8 dpllh:H9 \
+    --out results/benchmark/pigeon_hole.csv
+
+# Q6 : simulation de la compétition dans les conditions officielles
+# (python:3.12-slim, 4 CPU, 8 Gio, 60 s), sur toutes les instances de data/
+D="docker run --rm --cpus=4 --memory=8g -v $PWD:/w -w /w -e PYTHONDONTWRITEBYTECODE=1 python:3.12-slim"
+$D python experiments/competition.py --mode optimized --jobs 1 \
+    --csv results/competition/competition_optimized.csv > results/competition/competition_optimized.txt
+$D python experiments/competition.py --mode dpll --jobs 4 \
+    --csv results/competition/competition_dpll.csv > results/competition/competition_dpll.txt
+
+# Mesures complémentaires citées dans le rapport (quelques minutes, jusqu'à 15)
+python experiments/extra_measures.py > results/extra_measures.txt
 
 # Rapport : rapport/rapport.md -> rapport/rapport.pdf (pandoc + Edge/Chrome)
 python rapport/build_pdf.py
