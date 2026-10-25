@@ -59,7 +59,7 @@ def main():
         for r in ex.map(_task, tasks, chunksize=1):
             rows.append(r)
     keys = sorted({k for r in rows for k in r})
-    with open(a.out, "w", newline="") as f:
+    with open(a.out, "w", newline="", encoding="utf-8") as f:
         w = csv.DictWriter(f, fieldnames=keys)
         w.writeheader()
         w.writerows(rows)

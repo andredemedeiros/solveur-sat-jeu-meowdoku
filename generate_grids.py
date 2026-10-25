@@ -37,11 +37,11 @@ def main(argv=None):
         seed = a.seed * 100003 + i
         grid, sol = generate(a.N, M, K, seed=seed, planted=not a.random, unique=a.unique)
         path = os.path.join(a.outdir, f"{tag}_{a.N}x{M}_k{K}_{i:03d}.txt")
-        with open(path, "w") as f:
+        with open(path, "w", encoding="utf-8") as f:
             f.write(format_grid(grid))
         if sol:
             cats = {grid.zone_of(c): c for c in sol}
-            with open(path[:-4] + ".planted.txt", "w") as f:
+            with open(path[:-4] + ".planted.txt", "w", encoding="utf-8") as f:
                 f.write(format_solution(grid, cats))
         print(path, file=sys.stderr)
 

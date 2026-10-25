@@ -27,6 +27,13 @@ class Timeout(Exception):
     """Levée lorsque la limite de temps donnée au solveur est atteinte."""
 
 
+# Horloge des mesures (Q5) : temps CPU du processus, sauf sous Windows où
+# process_time n'avance que par pas de 15,6 ms (la plupart des exécutions
+# mesureraient 0) ; on y prend perf_counter, chaque mesure étant faite seule
+# dans un processus fils sans entrées/sorties (temps réel ≈ temps CPU).
+clock = time.perf_counter if sys.platform == "win32" else time.process_time
+
+
 # --------------------------------------------------------------------------- #
 # Outils communs
 # --------------------------------------------------------------------------- #
@@ -89,10 +96,16 @@ def find_pure(lits: set[int]) -> Optional[int]:
 
 def run_deep(fn: Callable[[], T], stack_mb: int = 512) -> T:
     """Exécute ``fn`` dans un thread à grosse pile : la profondeur de récursion
-    de DPLL peut atteindre le nombre de variables."""
+    de DPLL peut atteindre le nombre de variables. Windows refuse une pile
+    > 256 Mo : on réessaie avec des tailles décroissantes."""
     sys.setrecursionlimit(max(sys.getrecursionlimit(), 1_000_000))
     old = threading.stack_size()
-    threading.stack_size(stack_mb * 1024 * 1024)
+    for mb in (stack_mb, 256, 128, 64):
+        try:
+            threading.stack_size(mb * 1024 * 1024)
+            break
+        except ValueError:
+            continue
     box: dict = {}
 
     def target():

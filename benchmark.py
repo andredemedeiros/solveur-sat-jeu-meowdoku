@@ -5,7 +5,9 @@
 
 Chaque couple (instance, solveur[, graine]) est exécuté dans un processus
 fils ; le temps mesuré est le temps CPU du processus (time.process_time),
-insensible à la charge des autres processus. Les solveurs aléatoires
+insensible à la charge des autres processus -- sauf sous Windows, où il est
+remplacé par perf_counter (cf. ``solver.dpll.clock``) : utiliser alors au
+plus un processus par cœur physique (--jobs). Les solveurs aléatoires
 (algorithme 2, H0) sont exécutés avec 3 graines.
 """
 import argparse
@@ -76,7 +78,7 @@ def main():
             if i % 200 == 0:
                 print(f"  {i}/{len(tasks)}", file=sys.stderr, flush=True)
     keys = sorted({k for r in rows for k in r})
-    with open(a.out, "w", newline="") as f:
+    with open(a.out, "w", newline="", encoding="utf-8") as f:
         w = csv.DictWriter(f, fieldnames=keys)
         w.writeheader()
         w.writerows(rows)

@@ -11,19 +11,16 @@ dans un objet :class:`Stats` :
   conflicts   -- appels rencontrant la clause vide (feuilles d'échec)
   nodes       -- nombre total d'appels récursifs
   max_depth   -- profondeur maximale de récursion
-  time_total  -- temps CPU total (time.process_time)
+  time_total  -- temps CPU total (``dpll.clock``)
   time_heur   -- temps CPU passé dans ``heuristic.prepare`` + ``choose``
 """
 
 from __future__ import annotations
 
-import time
 from dataclasses import asdict, dataclass
 
-from .dpll import EMPTY, Timeout, assign, find_pure, make_formula, run_deep, scan
+from .dpll import EMPTY, Timeout, assign, clock, find_pure, make_formula, run_deep, scan
 from . import heuristics as H
-
-clock = time.process_time
 
 
 @dataclass

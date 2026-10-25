@@ -5,10 +5,9 @@ from __future__ import annotations
 
 import os
 import re
-import time
 
 from .cnf import check_model, parse_dimacs
-from .dpll import Timeout
+from .dpll import Timeout, clock
 
 SOLVERS = ["alg1", "alg2", "cdcl"]  # + "dpllh:<code>"
 
@@ -34,7 +33,7 @@ def run_one(path: str, solver: str, timeout: float = 60.0, seed: int = 0) -> dic
     res = {"instance": path, "family": os.path.basename(os.path.dirname(path)), "solver": solver,
            "seed": seed, "num_vars": cnf.num_vars, "num_clauses": cnf.num_clauses,
            "expected": expected_status(path, cnf)}
-    t0 = time.process_time()
+    t0 = clock()
     try:
         if solver == "alg1":
             from . import dpll
@@ -63,7 +62,7 @@ def run_one(path: str, solver: str, timeout: float = 60.0, seed: int = 0) -> dic
     except (Timeout, TimeoutError):
         res["status"] = "TIMEOUT"
         res["model_ok"] = None
-    res["cpu"] = time.process_time() - t0
+    res["cpu"] = clock() - t0
     exp = res["expected"]
     res["correct"] = None if res["status"] == "TIMEOUT" or exp is None else (
         res["status"] == exp and res["model_ok"] is not False)

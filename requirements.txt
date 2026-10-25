@@ -1,0 +1,7 @@
+# Le solveur (sat.py) n'utilise que la bibliothèque standard.
+# Dépendances des outils de génération, de validation et d'analyse :
+pycosat
+numpy
+pandas
+matplotlib
+pytest

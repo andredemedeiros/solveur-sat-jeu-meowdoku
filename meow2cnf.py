@@ -22,7 +22,7 @@ def main(argv=None):
     cnf, enc = encode(grid, redundant=not a.no_redundant, amo=a.amo)
     text = to_dimacs_string(cnf, enc.comments())
     if a.output:
-        with open(a.output, "w") as f:
+        with open(a.output, "w", encoding="utf-8") as f:
             f.write(text)
         print(f"{a.output} : {cnf.num_vars} variables, {cnf.num_clauses} clauses", file=sys.stderr)
     else:

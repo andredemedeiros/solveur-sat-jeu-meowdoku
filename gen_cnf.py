@@ -78,7 +78,7 @@ def main():
             seed = 1000 * N + i
             grid, _ = generate(N, seed=seed)
             name = f"meow_{N}x{N}_{i}"
-            with open(os.path.join(a.griddir, name + ".txt"), "w") as f:
+            with open(os.path.join(a.griddir, name + ".txt"), "w", encoding="utf-8") as f:
                 f.write(format_grid(grid))
             for sub, red in (("meow_sat", True), ("meow_nored", False)):
                 cnf, enc = encode(grid, redundant=red)
@@ -87,7 +87,7 @@ def main():
         for i in range(5):
             grid, _ = generate(N, seed=5000 * N + i, planted=False)
             name = f"rnd_{N}x{N}_{i}"
-            with open(os.path.join(a.griddir, name + ".txt"), "w") as f:
+            with open(os.path.join(a.griddir, name + ".txt"), "w", encoding="utf-8") as f:
                 f.write(format_grid(grid))
             cnf, enc = encode(grid)
             st = save(cnf, os.path.join(a.outdir, "meow_rnd", name + ".cnf"), enc.comments())

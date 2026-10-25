@@ -112,7 +112,29 @@ def parse_dimacs_string(text: str, strict: bool = False) -> CNF:
             raise DimacsError(f"variable {max_var} > {num_vars} déclarées")
         if len(clauses) != num_clauses:
             raise DimacsError(f"{len(clauses)} clauses lues, {num_clauses} déclarées")
+    elif len(clauses) != num_clauses:
+        # Certains fichiers (ex. SATLIB dubois100) omettent le 0 final de
+        # nombreuses lignes : la lecture « jusqu'au 0 » fusionne alors des
+        # clauses et change la formule. Si la lecture « une ligne = une
+        # clause » (règle de l'énoncé) est cohérente avec l'en-tête, on la retient.
+        by_line = _clauses_by_line(body)
+        if by_line is not None and len(by_line) == num_clauses:
+            clauses = by_line
     return CNF(max(num_vars, max_var), clauses, comments)
+
+
+def _clauses_by_line(body: list[str]) -> list[list[int]] | None:
+    """Une clause par ligne (0 final facultatif) ; None si une ligne contient
+    un 0 ailleurs qu'en dernière position."""
+    clauses = []
+    for line in body:
+        lits = list(map(int, line.split()))
+        if lits and lits[-1] == 0:
+            lits.pop()
+        if 0 in lits:
+            return None
+        clauses.append(lits)
+    return clauses
 
 
 def parse_dimacs(path: str, strict: bool = False) -> CNF:

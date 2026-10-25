@@ -2,7 +2,7 @@
 
 Python ≥ 3.12, **bibliothèque standard uniquement** pour le solveur (`sat.py`).
 Outils d'analyse : `pycosat` (solveur de référence pour la validation),
-`pandas`, `matplotlib`, `pytest`.
+`pandas`, `matplotlib`, `pytest` (`pip install -r requirements.txt`).
 
 ## Arborescence
 
@@ -10,7 +10,7 @@ Outils d'analyse : `pycosat` (solveur de référence pour la validation),
 |---|---|---|
 | `solver/cnf.py` | lecture/écriture DIMACS, structure CNF, vérification de modèles | Q2.1 |
 | `solver/dpll.py` | algorithmes 1 et 2 de l'énoncé (DPLL récursif, choix aléatoire) | Q2.2 |
-| `solver/heuristics.py` | heuristiques H0–H7 (statiques `s` / dynamiques `d`) + H8 (MOMS-produit) | Q4 |
+| `solver/heuristics.py` | heuristiques H0–H7 (statiques `s` / dynamiques `d`) + H8 (MOMS-produit), H9 (MRV) | Q4 |
 | `solver/dpll_h.py` | algorithme 3 (DPLL_H) instrumenté (décisions, retours arrière, …) | Q4, Q5 |
 | `solver/cdcl.py` | solveur optimisé (CDCL : watched literals, 1-UIP, VSIDS, restarts) | Q6 |
 | `solver/runner.py` | exécution instrumentée d'un solveur sur un fichier | Q2–Q5 |
@@ -29,7 +29,7 @@ Outils d'analyse : `pycosat` (solveur de référence pour la validation),
 | `tests/` | tests unitaires (`python -m pytest -q tests`) | — |
 | `data/` | instances DIMACS (SATLIB + générées) et grilles | — |
 | `results/` | CSV de mesures, tableaux et figures | Q5 |
-| `rapport/` | rapport | — |
+| `rapport/` | rapport (`rapport.md` source, `rapport.pdf` à rendre, `build_pdf.py` export) | — |
 
 ## Exemples
 
@@ -44,10 +44,13 @@ python verify_solution.py grille1.sol.txt
 
 # Q2 / Q4 : validation, Q5 : mesures
 python validate.py --timeout 20
-python benchmark.py --timeout 30 && python analyze.py
+python benchmark.py --timeout 20 --jobs 6 && python analyze.py
 
 # Q6 : interface imposée
 python sat.py instance.cnf --mode dpll
 python sat.py instance.cnf --mode optimized --output-model
 python competition.py data/cnf --timeout 60
+
+# Rapport : rapport/rapport.md -> rapport/rapport.pdf (pandoc + Edge/Chrome)
+python rapport/build_pdf.py
 ```

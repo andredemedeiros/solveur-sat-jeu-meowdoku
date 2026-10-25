@@ -70,7 +70,7 @@ def main():
         if not r["ok"] and r["result"] != "TIMEOUT":
             print("ERREUR", r)
     if a.csv:
-        with open(a.csv, "w", newline="") as f:
+        with open(a.csv, "w", newline="", encoding="utf-8") as f:
             w = csv.DictWriter(f, fieldnames=["instance", "result", "time", "ok"])
             w.writeheader()
             w.writerows(rows)

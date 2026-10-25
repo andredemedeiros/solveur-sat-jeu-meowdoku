@@ -159,23 +159,22 @@ def main():
                                                       (A.loc[idx][ok].decisions.fillna(0) + 1))})
         out.append("## Meowdoku : clauses redondantes L≥1 / C≥1\n\n" + md(pd.DataFrame(rows).set_index("solveur")) + "\n")
 
-    with open(os.path.join(a.outdir, "tables.md"), "w") as f:
+    with open(os.path.join(a.outdir, "tables.md"), "w", encoding="utf-8") as f:
         f.write("\n".join(out))
 
     # ================= figures =================
-    sel = [s for s in ["alg2", "dpllh:H1", "dpllh:H2d", "dpllh:H3d", "dpllh:H4d", "dpllh:H6d", "dpllh:H8", "cdcl"]
+    sel = [s for s in ["alg2", "dpllh:H1", "dpllh:H2d", "dpllh:H4d", "dpllh:H6d", "dpllh:H8", "dpllh:H9", "cdcl"]
            if s in solvers]
-    # cactus
+    # cactus (solveurs aléatoires : graine 0 seulement, une courbe = une exécution par instance)
+    d0 = df[df.solved & (df.seed == 0)]
     fig, ax = plt.subplots(figsize=(7.5, 4.2), dpi=150)
     for s in solvers:
         if s in sel:
             continue
-        t = np.sort(df[(df.solver == s) & df.solved].cpu.values)
+        t = np.sort(d0[d0.solver == s].cpu.values)
         ax.plot(np.arange(1, len(t) + 1), t, color=GREY, linewidth=1, alpha=.6)
     for k, s in enumerate(sel):
-        t = np.sort(df[(df.solver == s) & df.solved].cpu.values)
-        if s == "alg2":
-            t = np.sort(df[(df.solver == s) & df.solved & (df.seed == 0)].cpu.values)
+        t = np.sort(d0[d0.solver == s].cpu.values)
         ax.plot(np.arange(1, len(t) + 1), t, color=C[k], linewidth=2, label=NAMES[s])
     ax.set_yscale("log")
     ax.set_xlabel("nombre d'instances résolues", color=INK2)
@@ -196,6 +195,7 @@ def main():
             d = mm[mm.solver == s].groupby("N").par2.apply(gmean)
             ax.plot(d.index, d.values, color=C[k], linewidth=2, marker="o", markersize=4, label=NAMES[s])
         ax.set_yscale("log")
+        ax.set_xticks(sorted(mm.N.unique()))
         ax.set_xlabel("taille de grille N (= M = K)", color=INK2)
         ax.set_ylabel("CPU PAR-2, moy. géo. (s)", color=INK2)
         ax.set_title("Meowdoku (solution plantée) : temps de résolution selon N", color=INK, fontsize=10, loc="left")

@@ -47,6 +47,13 @@ def test_parse_satlib_quirks():
     assert cnf.clauses == [[1, -2, 3], [-1]]
 
 
+def test_parse_missing_terminators():
+    # dubois100 (SATLIB) : 0 final absent sur certaines lignes, une clause par ligne
+    cnf = parse_dimacs_string("p cnf 2 4\n1 2\n-1 2 0\n1 -2\n-1 -2 0\n")
+    assert cnf.clauses == [[1, 2], [-1, 2], [1, -2], [-1, -2]]
+    assert cdcl.solve(cnf.clauses, 2)[0] is False
+
+
 def test_assign():
     F = dpll.make_formula(EXAMPLE)
     assert set(dpll.assign(F, 2)) == {frozenset([1, 4, -5])}
