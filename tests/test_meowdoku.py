@@ -16,7 +16,7 @@ FIG2 = {"A": (3, 2), "B": (2, 5), "C": (1, 3), "D": (5, 6), "E": (4, 4), "F": (6
 
 
 def test_figure1_solution():
-    g = read_grid(os.path.join(ROOT, "data/grids/grille1.txt"))
+    g = read_grid(os.path.join(ROOT, "data", "examples", "grille1.txt"))
     assert check_solution(g, FIG2) == []
     cnf, enc = encode(g)
     s, m = cdcl.solve(cnf.clauses, cnf.num_vars)
@@ -25,14 +25,14 @@ def test_figure1_solution():
 
 
 def test_solution_roundtrip():
-    g = read_grid(os.path.join(ROOT, "data/grids/grille1.txt"))
+    g = read_grid(os.path.join(ROOT, "data", "examples", "grille1.txt"))
     g2, cats, stars = parse_solution_string(format_solution(g, FIG2))
     assert cats == FIG2 and g2.cells == g.cells
     assert sum(r.count("*") for r in stars) == 6
 
 
 def test_checker_detects_violations():
-    g = read_grid(os.path.join(ROOT, "data/grids/grille1.txt"))
+    g = read_grid(os.path.join(ROOT, "data", "examples", "grille1.txt"))
     bad = dict(FIG2, E=(4, 3))      # (4,3) appartient à A
     assert check_solution(g, bad)
 

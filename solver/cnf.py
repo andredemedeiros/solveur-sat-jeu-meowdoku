@@ -178,4 +178,5 @@ def check_model(clauses: Iterable[Iterable[int]], model: Mapping[int, bool]) -> 
 
 
 def model_to_dimacs_line(model: Mapping[int, bool], num_vars: int) -> str:
-    return "v " + " ".join(str(v if model.get(v, False) else -v) for v in range(1, num_vars + 1)) + " 0"
+    lits = [str(v if model.get(v, False) else -v) for v in range(1, num_vars + 1)]
+    return " ".join(["v", *lits, "0"])    # formule sans variable : « v 0 »

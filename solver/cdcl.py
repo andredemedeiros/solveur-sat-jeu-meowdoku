@@ -50,6 +50,7 @@ class CDCL:
     RESTART_BASE = 100
     VAR_DECAY = 0.95
     MIN_LEARNTS = 2000
+    CHECK_MASK = 255     # délai contrôlé toutes les CHECK_MASK + 1 décisions
 
     def __init__(self, num_vars: int, clauses):
         n = num_vars
@@ -72,6 +73,12 @@ class CDCL:
         self.ok = True
         self.conflicts = 0
         self.decisions = 0
+        # état des redémarrages / du nettoyage, conservé entre deux appels à
+        # solve() (recherche interrompue par un délai puis reprise : portfolio.py)
+        self.started = False
+        self.restart_idx = 0
+        self.conflicts_here = 0
+        self.max_learnts = 0
         for c in clauses:
             if not self.add_clause(c):
                 self.ok = False
@@ -337,25 +344,33 @@ class CDCL:
 
     # ------------------------------------------------------------------ #
     def solve(self, timeout: float = float("inf")) -> bool:
-        """True (SAT) / False (UNSAT) ; lève TimeoutError au-delà de ``timeout`` s."""
+        """True (SAT) / False (UNSAT) ; lève TimeoutError au-delà de ``timeout`` s.
+
+        Le délai n'est contrôlé que juste après une décision : la propagation
+        précédente s'est terminée sans conflit et le littéral de décision
+        attend dans la pile, exactement l'état du début d'une itération. Un
+        nouvel appel à solve() reprend donc la recherche là où elle s'était
+        arrêtée (pile, clauses apprises, activités, suite de Luby conservées).
+        Chaque appel fait au moins une décision : la reprise progresse."""
         deadline = time.perf_counter() + timeout
         if not self.ok:
             return False
-        if self.propagate() is not None:
-            return False
+        if not self.started:
+            self.started = True
+            if self.propagate() is not None:
+                self.ok = False
+                return False
+            self.max_learnts = max(self.MIN_LEARNTS, len(self.clauses) // 3)
         decay = 1.0 / self.VAR_DECAY
-        restart_idx = 0
-        restart_limit = luby(restart_idx) * self.RESTART_BASE
-        conflicts_here = 0
-        max_learnts = max(self.MIN_LEARNTS, len(self.clauses) // 3)
+        restart_limit = luby(self.restart_idx) * self.RESTART_BASE
+        ticks = 0            # décisions prises pendant cet appel
         while True:
             confl = self.propagate()
             if confl is not None:
                 self.conflicts += 1
-                conflicts_here += 1
-                if not self.conflicts & 255 and time.perf_counter() > deadline:
-                    raise TimeoutError
+                self.conflicts_here += 1
                 if not self.trail_lim:
+                    self.ok = False
                     return False
                 learnt, bt, lbd = self.analyze(confl)
                 self.cancel_until(bt)
@@ -373,14 +388,14 @@ class CDCL:
                     self.learnt_lbd.append(lbd)
                     self._enqueue(learnt[0], learnt)
                 self.var_inc *= decay
-                if conflicts_here >= restart_limit:
-                    conflicts_here = 0
-                    restart_idx += 1
-                    restart_limit = luby(restart_idx) * self.RESTART_BASE
+                if self.conflicts_here >= restart_limit:
+                    self.conflicts_here = 0
+                    self.restart_idx += 1
+                    restart_limit = luby(self.restart_idx) * self.RESTART_BASE
                     self.cancel_until(0)
-                if len(self.learnts) >= max_learnts + len(self.trail):
+                if len(self.learnts) >= self.max_learnts + len(self.trail):
                     self.reduce_db()
-                    max_learnts = int(max_learnts * 1.1)
+                    self.max_learnts = int(self.max_learnts * 1.1)
             else:
                 v = self.pick_branch()
                 if v is None:
@@ -388,6 +403,9 @@ class CDCL:
                 self.decisions += 1
                 self.trail_lim.append(len(self.trail))
                 self._enqueue((v << 1) | self.phase[v], None)
+                ticks += 1
+                if not ticks & self.CHECK_MASK and time.perf_counter() > deadline:
+                    raise TimeoutError
 
     def model(self) -> dict[int, bool]:
         val = self.val

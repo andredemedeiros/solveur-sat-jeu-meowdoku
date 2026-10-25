@@ -1,0 +1,23 @@
+180 instances x 19 solveurs = 3420 exécutions
+solveur         ok  faux timeout  modèles vérifiés
+alg1           161     0      19                 0
+alg2           161     0      19               102
+cdcl           179     0       1               110
+dpllh:H0       161     0      19               102
+dpllh:H1       163     0      17               103
+dpllh:H2s      161     0      19               102
+dpllh:H2d      162     0      18               103
+dpllh:H3s      163     0      17               104
+dpllh:H3d      162     0      18               103
+dpllh:H4s      164     0      16               105
+dpllh:H4d      165     0      15               106
+dpllh:H5s      161     0      19               102
+dpllh:H5d      162     0      18               103
+dpllh:H6s      164     0      16               105
+dpllh:H6d      165     0      15               106
+dpllh:H7s      160     0      20               101
+dpllh:H7d      163     0      17               104
+dpllh:H8       168     0      12               108
+dpllh:H9       169     0      11               108
+
+instances avec statuts contradictoires entre solveurs : 0

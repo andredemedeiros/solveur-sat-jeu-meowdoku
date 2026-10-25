@@ -27,7 +27,8 @@ class Timeout(Exception):
     """Levée lorsque la limite de temps donnée au solveur est atteinte."""
 
 
-# Horloge des mesures (Q5) : temps CPU du processus, sauf sous Windows où
+# Horloge des mesures (Q5) et des délais de tous les DPLL (algorithmes 1, 2
+# et DPLL_H) : temps CPU du processus, sauf sous Windows où
 # process_time n'avance que par pas de 15,6 ms (la plupart des exécutions
 # mesureraient 0) ; on y prend perf_counter, chaque mesure étant faite seule
 # dans un processus fils sans entrées/sorties (temps réel ≈ temps CPU).
@@ -127,7 +128,7 @@ def run_deep(fn: Callable[[], T], stack_mb: int = 512) -> T:
 # Algorithme 1 : satisfiabilité seule
 # --------------------------------------------------------------------------- #
 def dpll1(F: Formula, rng: random.Random, deadline: float = float("inf")) -> bool:
-    if time.perf_counter() > deadline:
+    if clock() > deadline:
         raise Timeout
     r = scan(F)
     if r is EMPTY:                       # ligne 1
@@ -155,7 +156,7 @@ def dpll1(F: Formula, rng: random.Random, deadline: float = float("inf")) -> boo
 # (le même objet est enrichi : pas de copie).
 
 def dpll2(F: Formula, rng: random.Random, deadline: float = float("inf")):
-    if time.perf_counter() > deadline:
+    if clock() > deadline:
         raise Timeout
     r = scan(F)
     if r is EMPTY:
@@ -202,7 +203,7 @@ def solve_sat(clauses, seed: Optional[int] = None, timeout: float = float("inf")
     """Algorithme 1 sur une liste de clauses DIMACS."""
     F = make_formula(clauses)
     rng = random.Random(seed)
-    deadline = time.perf_counter() + timeout
+    deadline = clock() + timeout
     return run_deep(lambda: dpll1(F, rng, deadline))
 
 
@@ -212,6 +213,6 @@ def solve(clauses, num_vars: int, seed: Optional[int] = None, timeout: float = f
 
     F = make_formula(clauses)
     rng = random.Random(seed)
-    deadline = time.perf_counter() + timeout
+    deadline = clock() + timeout
     s, v = run_deep(lambda: dpll2(F, rng, deadline))
     return s, (complete_model(v, num_vars) if s else None)

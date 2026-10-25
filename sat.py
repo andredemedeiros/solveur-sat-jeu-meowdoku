@@ -4,7 +4,8 @@
     python sat.py instance.cnf [--mode dpll|optimized] [--output-model]
 
   --mode dpll       Algorithme 2 de l'énoncé (DPLL récursif, choix aléatoire)
-  --mode optimized  Solveur CDCL (solver/cdcl.py) -- mode par défaut
+  --mode optimized  CDCL, relayé après 2 s par un DPLL_H en parallèle
+                    (solver/portfolio.py) -- mode par défaut
 
 La sortie standard ne contient que le résultat (« s SATISFIABLE » /
 « s UNSATISFIABLE » et, avec --output-model, la ligne « v ... 0 »).
@@ -21,7 +22,7 @@ from solver.cnf import DimacsError, check_model, model_to_dimacs_line, parse_dim
 
 
 def main(argv=None) -> int:
-    ap = argparse.ArgumentParser(description="Solveur SAT (DPLL / CDCL)")
+    ap = argparse.ArgumentParser(description="Solveur SAT (DPLL / CDCL + DPLL)")
     ap.add_argument("instance", help="fichier DIMACS CNF")
     ap.add_argument("--mode", choices=["dpll", "optimized"], default="optimized")
     ap.add_argument("--output-model", action="store_true", help="afficher le modèle (ligne v)")
@@ -39,8 +40,8 @@ def main(argv=None) -> int:
         from solver import dpll
         sat, model = dpll.solve(cnf.clauses, cnf.num_vars, seed=args.seed)
     else:
-        from solver import cdcl
-        sat, model = cdcl.solve(cnf.clauses, cnf.num_vars)
+        from solver import portfolio
+        sat, model = portfolio.solve(cnf.clauses, cnf.num_vars)
 
     out = ["s SATISFIABLE" if sat else "s UNSATISFIABLE"]
     if sat and args.output_model:

@@ -1,0 +1,121 @@
+mode=dpll  timeout=60 s  jobs=4
+  data/examples                            instances=   2  correctes=   2  timeouts=  0  fausses= 0  non vérifiables= 0  temps total=    1.7 s  médiane= 0.83 s  max= 0.87 s
+  data/generated/cnf/meow_nored            instances=  36  correctes=  34  timeouts=  2  fausses= 0  non vérifiables= 0  temps total=  133.4 s  médiane= 0.73 s  max=55.67 s
+  data/generated/cnf/meow_rnd              instances=  40  correctes=  33  timeouts=  7  fausses= 0  non vérifiables= 0  temps total=   60.8 s  médiane= 0.49 s  max=39.17 s
+  data/generated/cnf/meow_sat              instances=  36  correctes=  34  timeouts=  2  fausses= 0  non vérifiables= 0  temps total=   66.1 s  médiane= 0.53 s  max=23.77 s
+  data/generated/cnf/php                   instances=   5  correctes=   5  timeouts=  0  fausses= 0  non vérifiables= 0  temps total=    3.3 s  médiane= 0.48 s  max= 1.35 s
+  data/generated/cnf/rand3                 instances=  60  correctes=  60  timeouts=  0  fausses= 0  non vérifiables= 0  temps total=   32.4 s  médiane= 0.50 s  max= 1.23 s
+  data/public-instances/instances          instances=  41  correctes=  38  timeouts=  3  fausses= 0  non vérifiables= 0  temps total=  100.2 s  médiane= 0.62 s  max=31.02 s
+  data/satlib/aim                          instances=  72  correctes=  32  timeouts= 40  fausses= 0  non vérifiables= 0  temps total=  128.5 s  médiane= 1.50 s  max=49.19 s
+  data/satlib/dubois                       instances=  13  correctes=   0  timeouts= 13  fausses= 0  non vérifiables= 0  temps total=    0.0 s  médiane= 0.00 s  max= 0.00 s
+  data/satlib/flat50-115                   instances=  30  correctes=  30  timeouts=  0  fausses= 0  non vérifiables= 0  temps total=   22.7 s  médiane= 0.63 s  max= 1.87 s
+  data/satlib/pigeon-hole                  instances=   5  correctes=   3  timeouts=  2  fausses= 0  non vérifiables= 0  temps total=   11.3 s  médiane= 1.35 s  max= 9.35 s
+  data/satlib/uf100-430                    instances=  30  correctes=  24  timeouts=  6  fausses= 0  non vérifiables= 0  temps total=  579.6 s  médiane=17.29 s  max=59.22 s
+  data/satlib/uf20-91                      instances= 100  correctes= 100  timeouts=  0  fausses= 0  non vérifiables= 0  temps total=   47.8 s  médiane= 0.47 s  max= 0.60 s
+  data/satlib/uf50-218                     instances= 100  correctes= 100  timeouts=  0  fausses= 0  non vérifiables= 0  temps total=   60.1 s  médiane= 0.59 s  max= 0.98 s
+  data/satlib/uf75-325                     instances= 100  correctes= 100  timeouts=  0  fausses= 0  non vérifiables= 0  temps total=  267.7 s  médiane= 2.06 s  max= 9.98 s
+  data/satlib/uuf100-430                   instances=  30  correctes=   4  timeouts= 26  fausses= 0  non vérifiables= 0  temps total=  200.7 s  médiane=53.06 s  max=59.44 s
+  data/satlib/uuf50-218                    instances= 100  correctes= 100  timeouts=  0  fausses= 0  non vérifiables= 0  temps total=   56.1 s  médiane= 0.55 s  max= 0.79 s
+  data/satlib/uuf75-325                    instances= 100  correctes= 100  timeouts=  0  fausses= 0  non vérifiables= 0  temps total=  427.8 s  médiane= 4.24 s  max= 8.19 s
+  TOTAL                                    instances= 900  correctes= 799  timeouts=101  fausses= 0  non vérifiables= 0  temps total= 2200.0 s  médiane= 0.61 s  max=59.44 s
+TIMEOUT data/generated/cnf/meow_nored/meow_16x16_0.cnf
+TIMEOUT data/generated/cnf/meow_nored/meow_24x24_1.cnf
+TIMEOUT data/generated/cnf/meow_rnd/rnd_14x14_1.cnf
+TIMEOUT data/generated/cnf/meow_rnd/rnd_14x14_2.cnf
+TIMEOUT data/generated/cnf/meow_rnd/rnd_14x14_4.cnf
+TIMEOUT data/generated/cnf/meow_rnd/rnd_16x16_0.cnf
+TIMEOUT data/generated/cnf/meow_rnd/rnd_16x16_1.cnf
+TIMEOUT data/generated/cnf/meow_rnd/rnd_16x16_2.cnf
+TIMEOUT data/generated/cnf/meow_rnd/rnd_16x16_4.cnf
+TIMEOUT data/generated/cnf/meow_sat/meow_16x16_0.cnf
+TIMEOUT data/generated/cnf/meow_sat/meow_24x24_1.cnf
+TIMEOUT data/public-instances/instances/public-03.cnf
+TIMEOUT data/public-instances/instances/public-12.cnf
+TIMEOUT data/public-instances/instances/public-27.cnf
+TIMEOUT data/satlib/aim/aim-100-1_6-no-1.cnf
+TIMEOUT data/satlib/aim/aim-100-1_6-no-2.cnf
+TIMEOUT data/satlib/aim/aim-100-1_6-no-3.cnf
+TIMEOUT data/satlib/aim/aim-100-1_6-no-4.cnf
+TIMEOUT data/satlib/aim/aim-100-1_6-yes1-1.cnf
+TIMEOUT data/satlib/aim/aim-100-1_6-yes1-2.cnf
+TIMEOUT data/satlib/aim/aim-100-1_6-yes1-3.cnf
+TIMEOUT data/satlib/aim/aim-100-1_6-yes1-4.cnf
+TIMEOUT data/satlib/aim/aim-100-2_0-no-1.cnf
+TIMEOUT data/satlib/aim/aim-100-2_0-no-2.cnf
+TIMEOUT data/satlib/aim/aim-100-2_0-no-3.cnf
+TIMEOUT data/satlib/aim/aim-100-2_0-no-4.cnf
+TIMEOUT data/satlib/aim/aim-100-2_0-yes1-1.cnf
+TIMEOUT data/satlib/aim/aim-100-2_0-yes1-2.cnf
+TIMEOUT data/satlib/aim/aim-100-2_0-yes1-3.cnf
+TIMEOUT data/satlib/aim/aim-100-2_0-yes1-4.cnf
+TIMEOUT data/satlib/aim/aim-200-1_6-no-1.cnf
+TIMEOUT data/satlib/aim/aim-200-1_6-no-2.cnf
+TIMEOUT data/satlib/aim/aim-200-1_6-no-3.cnf
+TIMEOUT data/satlib/aim/aim-200-1_6-no-4.cnf
+TIMEOUT data/satlib/aim/aim-200-1_6-yes1-1.cnf
+TIMEOUT data/satlib/aim/aim-200-1_6-yes1-2.cnf
+TIMEOUT data/satlib/aim/aim-200-1_6-yes1-3.cnf
+TIMEOUT data/satlib/aim/aim-200-1_6-yes1-4.cnf
+TIMEOUT data/satlib/aim/aim-200-2_0-no-1.cnf
+TIMEOUT data/satlib/aim/aim-200-2_0-no-2.cnf
+TIMEOUT data/satlib/aim/aim-200-2_0-no-3.cnf
+TIMEOUT data/satlib/aim/aim-200-2_0-no-4.cnf
+TIMEOUT data/satlib/aim/aim-200-2_0-yes1-1.cnf
+TIMEOUT data/satlib/aim/aim-200-2_0-yes1-2.cnf
+TIMEOUT data/satlib/aim/aim-200-2_0-yes1-3.cnf
+TIMEOUT data/satlib/aim/aim-200-2_0-yes1-4.cnf
+TIMEOUT data/satlib/aim/aim-200-3_4-yes1-1.cnf
+TIMEOUT data/satlib/aim/aim-200-3_4-yes1-2.cnf
+TIMEOUT data/satlib/aim/aim-200-3_4-yes1-3.cnf
+TIMEOUT data/satlib/aim/aim-200-3_4-yes1-4.cnf
+TIMEOUT data/satlib/aim/aim-200-6_0-yes1-1.cnf
+TIMEOUT data/satlib/aim/aim-200-6_0-yes1-2.cnf
+TIMEOUT data/satlib/aim/aim-200-6_0-yes1-3.cnf
+TIMEOUT data/satlib/aim/aim-200-6_0-yes1-4.cnf
+TIMEOUT data/satlib/dubois/dubois100.cnf
+TIMEOUT data/satlib/dubois/dubois20.cnf
+TIMEOUT data/satlib/dubois/dubois21.cnf
+TIMEOUT data/satlib/dubois/dubois22.cnf
+TIMEOUT data/satlib/dubois/dubois23.cnf
+TIMEOUT data/satlib/dubois/dubois24.cnf
+TIMEOUT data/satlib/dubois/dubois25.cnf
+TIMEOUT data/satlib/dubois/dubois26.cnf
+TIMEOUT data/satlib/dubois/dubois27.cnf
+TIMEOUT data/satlib/dubois/dubois28.cnf
+TIMEOUT data/satlib/dubois/dubois29.cnf
+TIMEOUT data/satlib/dubois/dubois30.cnf
+TIMEOUT data/satlib/dubois/dubois50.cnf
+TIMEOUT data/satlib/pigeon-hole/hole10.cnf
+TIMEOUT data/satlib/pigeon-hole/hole9.cnf
+TIMEOUT data/satlib/uf100-430/uf100-013.cnf
+TIMEOUT data/satlib/uf100-430/uf100-014.cnf
+TIMEOUT data/satlib/uf100-430/uf100-021.cnf
+TIMEOUT data/satlib/uf100-430/uf100-023.cnf
+TIMEOUT data/satlib/uf100-430/uf100-030.cnf
+TIMEOUT data/satlib/uf100-430/uf100-08.cnf
+TIMEOUT data/satlib/uuf100-430/uuf100-01.cnf
+TIMEOUT data/satlib/uuf100-430/uuf100-010.cnf
+TIMEOUT data/satlib/uuf100-430/uuf100-011.cnf
+TIMEOUT data/satlib/uuf100-430/uuf100-012.cnf
+TIMEOUT data/satlib/uuf100-430/uuf100-013.cnf
+TIMEOUT data/satlib/uuf100-430/uuf100-014.cnf
+TIMEOUT data/satlib/uuf100-430/uuf100-015.cnf
+TIMEOUT data/satlib/uuf100-430/uuf100-016.cnf
+TIMEOUT data/satlib/uuf100-430/uuf100-017.cnf
+TIMEOUT data/satlib/uuf100-430/uuf100-018.cnf
+TIMEOUT data/satlib/uuf100-430/uuf100-019.cnf
+TIMEOUT data/satlib/uuf100-430/uuf100-02.cnf
+TIMEOUT data/satlib/uuf100-430/uuf100-020.cnf
+TIMEOUT data/satlib/uuf100-430/uuf100-021.cnf
+TIMEOUT data/satlib/uuf100-430/uuf100-022.cnf
+TIMEOUT data/satlib/uuf100-430/uuf100-023.cnf
+TIMEOUT data/satlib/uuf100-430/uuf100-024.cnf
+TIMEOUT data/satlib/uuf100-430/uuf100-025.cnf
+TIMEOUT data/satlib/uuf100-430/uuf100-026.cnf
+TIMEOUT data/satlib/uuf100-430/uuf100-027.cnf
+TIMEOUT data/satlib/uuf100-430/uuf100-029.cnf
+TIMEOUT data/satlib/uuf100-430/uuf100-03.cnf
+TIMEOUT data/satlib/uuf100-430/uuf100-030.cnf
+TIMEOUT data/satlib/uuf100-430/uuf100-04.cnf
+TIMEOUT data/satlib/uuf100-430/uuf100-07.cnf
+TIMEOUT data/satlib/uuf100-430/uuf100-08.cnf
