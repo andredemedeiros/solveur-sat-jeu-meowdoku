@@ -1,0 +1,19 @@
+// Meowdoku, general model (Q6.5): any N, M and K (K regions).
+// Needs the data of the grid: see tools/grid2csp.py.
+//
+// At most one cat per row and per column, exactly one per region, no two
+// cats in diagonal. (Horizontal and vertical neighbours are already excluded
+// by the rows and the columns.)
+
+array cat[N][M] : bool;
+
+forall i in 1..N { constraint atMostOne(cat[i][*]); }
+forall j in 1..M { constraint atMostOne(cat[*][j]); }
+
+forall i in 1..(N - 1), j in 1..M, l in (j - 1)..(j + 1) {
+    constraint l >= 1 and l <= M and l != j -> not (cat[i][j] and cat[i + 1][l]);
+}
+
+forall z in Zone {
+    constraint exactlyOne(cat[i][j] forall i in 1..N, j in 1..M : region[i][j] = z);
+}

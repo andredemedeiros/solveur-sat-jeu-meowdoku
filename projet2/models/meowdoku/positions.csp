@@ -1,0 +1,22 @@
+// Meowdoku, model 1: the position of the cat of each region.
+// Needs the data of the grid (N = M = K): see tools/grid2csp.py.
+//   row[z], col[z]: row and column of the cat of the region z.
+
+array row[Zone] : 1..N;
+array col[Zone] : 1..M;
+
+// at most one cat per row and per column
+constraint allDifferent(row[*]);
+constraint allDifferent(col[*]);
+
+// the cat of the region z is in the region z
+forall z in Zone, i in 1..N, j in 1..M {
+    constraint region[i][j] != z -> not (row[z] = i and col[z] = j);
+}
+
+// no two cats in neighbouring cells (diagonally: rows and columns differ)
+forall z1 in Zone, z2 in Zone, i in 1..N, j in 1..M,
+       k in (i - 1)..(i + 1), l in (j - 1)..(j + 1) {
+    constraint z1 < z2 and k != i and l != j
+        -> not (row[z1] = i and col[z1] = j and row[z2] = k and col[z2] = l);
+}

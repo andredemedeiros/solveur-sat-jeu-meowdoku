@@ -1,0 +1,20 @@
+// Meowdoku, model 2: one boolean per cell (as in part I).
+// Needs the data of the grid (N = M = K): see tools/grid2csp.py.
+
+array cat[N][M] : bool;
+
+// exactly one cat per row and per column (N = M = K)
+forall i in 1..N { constraint exactlyOne(cat[i][*]); }
+forall j in 1..M { constraint exactlyOne(cat[*][j]); }
+
+// no two cats in neighbouring cells (diagonally: rows and columns are exclusive)
+forall i in 1..(N - 1), j in 1..M, l in (j - 1)..(j + 1) {
+    constraint l >= 1 and l <= M and l != j -> not (cat[i][j] and cat[i + 1][l]);
+}
+
+// at most one cat per region: no slice selects a region, so every pair of
+// distinct cells (in the lexicographic order) of the same region is forbidden
+forall i1 in 1..N, j1 in 1..M, i2 in i1..N, j2 in 1..M {
+    constraint (i1 < i2 or j1 < j2) and region[i1][j1] = region[i2][j2]
+        -> not (cat[i1][j1] and cat[i2][j2]);
+}

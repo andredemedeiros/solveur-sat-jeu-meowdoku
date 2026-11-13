@@ -1,0 +1,24 @@
+// Meowdoku, model 2 + redundant rule "at least one cat per region" (Q6.4).
+// Needs the data of the grid (N = M = K): see tools/grid2csp.py.
+//
+// The list `e forall ranges : condition` is an extension of the language
+// (see README): it gives the cells of the region z, which no slice can do.
+
+array cat[N][M] : bool;
+
+forall i in 1..N { constraint exactlyOne(cat[i][*]); }
+forall j in 1..M { constraint exactlyOne(cat[*][j]); }
+
+forall i in 1..(N - 1), j in 1..M, l in (j - 1)..(j + 1) {
+    constraint l >= 1 and l <= M and l != j -> not (cat[i][j] and cat[i + 1][l]);
+}
+
+forall i1 in 1..N, j1 in 1..M, i2 in i1..N, j2 in 1..M {
+    constraint (i1 < i2 or j1 < j2) and region[i1][j1] = region[i2][j2]
+        -> not (cat[i1][j1] and cat[i2][j2]);
+}
+
+// redundant: at least one cat per region
+forall z in Zone {
+    constraint atLeastOne(cat[i][j] forall i in 1..N, j in 1..M : region[i][j] = z);
+}
