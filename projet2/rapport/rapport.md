@@ -262,5 +262,5 @@ résolution équivalente. Limites : grilles planifiées uniquement (satisfiables
 - L'interface est celle conseillée par l'énoncé (`python csp.py model.csp [--dimacs f] [--solve]`).
 - Dépendance : `lark` ; le solveur et le vérificateur de la partie I sont repris sans modification
   (`solver/`, `meowdoku/`, `sat.py`).
-- Aide d'un assistant IA (Claude Code) pour l'écriture du code et du rapport ; le code a été relu et testé
+- Aide d'un assistant IA pour l'écriture du code ; le code a été relu et testé
   (235 tests).
