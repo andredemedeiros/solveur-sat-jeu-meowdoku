@@ -1,0 +1,8 @@
+// Pigeonhole: 4 pigeons, 3 holes, each pigeon in its own hole: UNSAT.
+
+const P = 4;
+const H = 3;
+
+array hole[P] : 1..H;
+
+constraint allDifferent(hole[*]);

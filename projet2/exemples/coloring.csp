@@ -1,0 +1,22 @@
+// Graph colouring with 3 colours: the Petersen graph (10 vertices, 15 edges,
+// chromatic number 3).
+
+enum Color = { Red, Green, Blue };
+
+const V = 10;
+const E = 15;
+const edge[E][2] = [
+    [1, 2], [2, 3], [3, 4], [4, 5], [5, 1],     // outer cycle
+    [6, 8], [8, 10], [10, 7], [7, 9], [9, 6],   // inner star
+    [1, 6], [2, 7], [3, 8], [4, 9], [5, 10]     // spokes
+];
+
+array color[V] : Color;
+
+forall e in 1..E {
+    constraint color[edge[e][1]] != color[edge[e][2]];
+}
+
+// symmetry breaking: the colours of vertex 1 and 2 are fixed
+constraint color[1] = Red;
+constraint color[2] = Green;

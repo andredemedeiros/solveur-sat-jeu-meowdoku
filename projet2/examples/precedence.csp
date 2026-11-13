@@ -1,0 +1,15 @@
+// Precedence and associativity: compare each constraint with its AST.
+// python csp.py examples/precedence.csp
+
+var a : bool;
+var b : bool;
+var c : bool;
+
+constraint a or b and c;        // a or (b and c)
+constraint not a and b;         // (not a) and b
+constraint not (a and b);
+constraint a and b and c;       // (a and b) and c: left associative
+constraint a or b or c;         // (a or b) or c: left associative
+constraint a -> b -> c;         // a -> (b -> c): right associative
+constraint a or b -> c;         // (a or b) -> c
+constraint not not a;

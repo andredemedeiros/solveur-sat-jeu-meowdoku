@@ -1,0 +1,10 @@
+// The example of the subject (Part II, "Point de depart").
+// python csp.py examples/subject.csp
+
+var x : bool;
+var y : bool;
+var z : bool;
+
+constraint x or y;
+constraint (not x) and z;
+constraint z -> y;

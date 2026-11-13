@@ -1,0 +1,16 @@
+// Three pigeons, two holes: pij means "pigeon i is in hole j".
+// Each pigeon is in a hole, and no hole holds two pigeons: unsatisfiable.
+// python csp.py examples/pigeonhole.csp
+
+var p11 : bool;  var p12 : bool;
+var p21 : bool;  var p22 : bool;
+var p31 : bool;  var p32 : bool;
+
+// each pigeon is in a hole
+constraint p11 or p12;
+constraint p21 or p22;
+constraint p31 or p32;
+
+// no hole holds two pigeons
+constraint not (p11 and p21) and not (p11 and p31) and not (p21 and p31);
+constraint not (p12 and p22) and not (p12 and p32) and not (p22 and p32);

@@ -1,0 +1,7 @@
+// A syntax error: "and" is a keyword, it cannot be the name of a variable.
+// python csp.py examples/syntax-error.csp
+
+var x : bool;
+var and : bool;
+
+constraint x;

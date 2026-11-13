@@ -1,0 +1,14 @@
+// N queens: queen[i] is the column of the queen of row i.
+
+const N = 8;
+
+array queen[N] : 1..N;
+
+// one queen per column
+constraint allDifferent(queen[*]);
+
+// no two queens on a diagonal: arithmetic is only allowed on known
+// values, so the diagonals are forbidden value by value
+forall i in 1..N, j in 1..N, a in 1..N, b in 1..N {
+    constraint i < j and abs(a - b) = j - i -> not (queen[i] = a and queen[j] = b);
+}
