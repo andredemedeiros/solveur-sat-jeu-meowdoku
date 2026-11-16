@@ -263,4 +263,4 @@ résolution équivalente. Limites : grilles planifiées uniquement (satisfiables
 - Dépendance : `lark` ; le solveur et le vérificateur de la partie I sont repris sans modification
   (`solver/`, `meowdoku/`, `sat.py`).
 - Aide d'un assistant IA pour l'écriture du code ; le code a été relu et testé
-  (235 tests).
+  (237 tests).

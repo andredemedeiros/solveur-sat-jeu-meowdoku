@@ -73,6 +73,8 @@ class Analyzer:
         self.new_name(d.name, d.pos)
         values = []
         for i, name in enumerate(d.values):
+            if name == d.name:  # the type itself is only registered after its values
+                raise CompileError(f"name '{name}' is already declared", d.pos)
             self.new_name(name, d.pos)
             self.symbols[name] = EnumValue(EnumVal(d.name, i, name))  # also detects duplicates
             values.append(self.symbols[name].value)

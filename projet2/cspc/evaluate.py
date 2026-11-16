@@ -21,7 +21,7 @@ from __future__ import annotations
 from itertools import product
 
 from .errors import CompileError
-from .ground import (And, Call, Cell, Const, Iff, Not, Or, mk_and, mk_cmp, mk_iff, mk_implies,
+from .ground import (And, Call, Cell, Cmp, Const, Iff, Not, Or, mk_and, mk_cmp, mk_iff, mk_implies,
                      mk_not, mk_or)
 from .model import ConstArray, ConstInt, EnumVal, EnumValue, VarArray
 import cspc.syntax as ast
@@ -103,7 +103,7 @@ class Evaluator:
         return mk_cmp(e.op, self._operand(a), self._operand(b))
 
     def _is_boolean(self, v) -> bool:
-        if isinstance(v, bool) or isinstance(v, (Not, And, Or, Iff, Call)):
+        if isinstance(v, bool) or isinstance(v, (Not, And, Or, Iff, Cmp, Call)):
             return True
         return isinstance(v, Cell) and self.symbols[v.array].domain.is_bool
 

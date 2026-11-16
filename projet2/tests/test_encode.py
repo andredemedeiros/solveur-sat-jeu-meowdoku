@@ -151,6 +151,15 @@ def test_global_under_negation_is_exact():
                           "constraint t = exactlyOne(p, q, r);", amo)
 
 
+def test_equality_between_comparisons():
+    """= and != between two non-elementary booleans (comparisons, connectives)."""
+    for amo in ("pairwise", "sinz"):
+        check_equivalence("var x : 1..3; var y : 1..3; var p : bool;"
+                          "constraint (x = 2) = (y = 3);"
+                          "constraint (x < 2) != (y <= 2) or p;"
+                          "constraint (x != y) = (p and x = 1);", amo)
+
+
 def test_sequential_counter_sizes():
     """Sinz: 3n - 4 clauses and n - 1 auxiliary variables for atMostOne of n literals."""
     n = 10

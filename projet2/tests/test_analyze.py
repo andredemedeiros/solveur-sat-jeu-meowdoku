@@ -32,6 +32,7 @@ ERRORS = [
     ("const N = 4;",                                   "'N' is already declared"),
     ("enum E = { Red };",                              "'Red' is already declared"),
     ("enum E = { P, P };",                             "'P' is already declared"),
+    ("enum E = { E, P };",                             "'E' is already declared"),
     ("forall x in 1..2 { constraint b; }",             "'x' is already declared"),
     ("forall i in 1..2, i in 1..2 { constraint b; }",  "'i' is already declared"),
     ("constraint x;",                                  "a constraint must be boolean"),
